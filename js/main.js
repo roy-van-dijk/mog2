@@ -22,7 +22,7 @@ let items = {
 };
 
 const setProducts = (products) => {
-    toggleNav();
+    closeNav();
     productList.innerHTML = '';
     products.forEach(product => {
         let element = productTemplate.content.cloneNode(true);
@@ -97,7 +97,7 @@ const searchFunction = debounce(function(e) {
 }, 250);
 
 const setDarkMode = (mode) => {
-    toggleNav();
+    closeNav();
     localStorage.setItem('darkMode', mode);
     darkMode.checked = mode;
     
@@ -117,6 +117,11 @@ const setDarkMode = (mode) => {
 const toggleNav = () => {
     navOpen = !navOpen;
     navOpen ? nav.classList.remove('open') : nav.classList.add('open');
+}
+
+const closeNav = () => {
+    navOpen = false;
+    nav.classList.remove('open');
 }
 
 const storedDarkMode = JSON.parse(localStorage.getItem('darkMode'));
