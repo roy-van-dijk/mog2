@@ -22,6 +22,7 @@ let items = {
 };
 
 const setProducts = (products) => {
+    toggleNav();
     productList.innerHTML = '';
     products.forEach(product => {
         let element = productTemplate.content.cloneNode(true);
@@ -96,6 +97,7 @@ const searchFunction = debounce(function(e) {
 }, 250);
 
 const setDarkMode = (mode) => {
+    toggleNav();
     localStorage.setItem('darkMode', mode);
     darkMode.checked = mode;
     
