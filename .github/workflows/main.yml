@@ -21,6 +21,6 @@ jobs:
           git config --global user.name "Roy van Dijk"
           git config --global user.email "roy.van.dijk@outlook.com"
           git add .
-          git commit -m "Response update"
+          git diff-index --quiet HEAD || git commit -am "Response update"
           git pull
           git push
