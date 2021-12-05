@@ -14,10 +14,9 @@ jobs:
       - uses: actions/checkout@v2
       - name: Make an API request, store the result in /js/response.json and commit
         run: |
-          wget -O ./js/response.json https://store.finalfantasyxiv.com/ffxivstore/en-gb/product/,
-          git config --global user.name 'Roy van Dijk',
-          git config --global user.email 'roy.van.dijk@outlook.com',
-          git status,
-          git commit -m 'Response update',
-          git pull,
-          git push,
+          wget -O ./js/response.json "https://store.finalfantasyxiv.com/ffxivstore/en-gb/product/"
+          git config --global user.name "Roy van Dijk"
+          git config --global user.email "roy.van.dijk@outlook.com"
+          git commit -m 'Response update'
+          git pull
+          git push
