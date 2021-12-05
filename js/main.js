@@ -9,6 +9,7 @@ const menu = document.querySelector('.menu');
 const nav = document.querySelector('nav');
 let navOpen = false;
 const basePageUrl = 'https://store.finalfantasyxiv.com/ffxivstore/en-gb/product/';
+let response = {};
 let items = {
     all: [],
     outfit: [],
@@ -124,6 +125,12 @@ const closeNav = () => {
     nav.classList.remove('open');
 }
 
+const main = () => {
+    addTypeButtons();
+    sortProducts(response.products);
+    setProducts(response.products);
+}
+
 const storedDarkMode = JSON.parse(localStorage.getItem('darkMode'));
 setDarkMode(storedDarkMode);
 
@@ -131,6 +138,9 @@ search.addEventListener('keyup', (e) => searchFunction(e));
 darkMode.addEventListener('change', (e) => setDarkMode(e.target.checked));
 menu.addEventListener('click', () => toggleNav());
 
-addTypeButtons();
-sortProducts(response.products);
-setProducts(response.products);
+fetch('./js/response.json')
+  .then(response => response.json())
+  .then(data => {
+    response = data;
+    main();
+  });
