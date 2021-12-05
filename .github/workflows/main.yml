@@ -16,7 +16,9 @@ jobs:
         run: |
           wget -O ./js/response.json "https://store.finalfantasyxiv.com/ffxivstore/en-gb/product/",
           pwd
-          cat "js/response.json",
+          cd js
+          ls
+          cat response.json
           git config --global user.name "Roy van Dijk",
           git config --global user.email "roy.van.dijk@outlook.com",
           git commit -m "Response update",
