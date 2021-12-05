@@ -15,7 +15,7 @@ jobs:
       - name: Make an API request, store the result in /js/response.json and commit
         run: |
           wget -O ./js/response.json "https://store.finalfantasyxiv.com/ffxivstore/en-gb/product/",
-          ls,
+          ls
           cat ./js/response.json,
           git config --global user.name "Roy van Dijk",
           git config --global user.email "roy.van.dijk@outlook.com",
