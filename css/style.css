@@ -242,12 +242,15 @@ nav {
 
 @media (max-width: 1000px) {
     main {
-        margin: 75px auto 20px auto;
+        margin: 7vh auto 20px auto;
+        padding-top: 25px;
     }
     nav {
         display: none;
         flex-direction: column;
-        top: 50px;
+        top: 7vh;
+        height: 93vh;
+        overflow-y: scroll;
     }
     nav.open {
         display: block;
@@ -270,9 +273,10 @@ nav {
         line-height: 44px;
     }
     .menu {
+        overflow: hidden;
         display: block;
-        height: 50px;
-        line-height: 50px;
+        height: 7vh;
+        line-height: 7vh;
     }
     .products {
         grid-template-columns: 1fr 1fr 1fr;

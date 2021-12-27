@@ -161,8 +161,8 @@ const setDarkMode = (mode) => {
 }
 
 const toggleNav = () => {
-    navOpen = !navOpen;
     navOpen ? nav.classList.remove('open') : nav.classList.add('open');
+    navOpen = !navOpen;
 }
 
 const closeNav = () => {
