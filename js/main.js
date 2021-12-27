@@ -26,6 +26,7 @@ let items = {
 
 const setProducts = (products) => {
     closeNav();
+    productList.classList.remove('empty');
     productList.innerHTML = '';
     products.forEach(product => {
         let element = productTemplate.content.cloneNode(true);
@@ -41,6 +42,11 @@ const setProducts = (products) => {
         productList.appendChild(element);
     });
     window.scrollTo(0, 0);
+    console.log(productList);
+    if (productList.children.length === 0) {
+        productList.classList.add('empty');
+        productList.innerHTML = '<li>No results found.</li>';
+    }
 }
 
 const sortProducts = (products) => {
@@ -102,14 +108,14 @@ const addTypeButtons = () => {
         let element = typeButtonTemplate.content.cloneNode(true);
         let button = element.querySelector('.type-button');
         button.innerText = k;
+        button.dataset.type = k;
         if(k === 'sale' || k === 'new') {
             button.classList.add('special');
             button.append(` (${v.length})`);
         }
-        button.addEventListener('click', () => {
-            setProducts(items[k]);
-            search.value = '';
-        });
+        if(k === 'all') {
+            button.classList.add('active');
+        }
 
         if(k === 'sale' && items.sale.length === 0) {
             continue;
@@ -121,6 +127,16 @@ const addTypeButtons = () => {
 
         typeButtonList.appendChild(element);
     }
+
+    let buttons = document.querySelectorAll('.type-button');
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            setProducts(items[button.dataset.type]);
+            buttons.forEach(b => b.classList.remove('active'));
+            button.classList.add('active');
+            search.value = '';
+        });
+    });
 }
 
 const debounce = (func, wait) => {
@@ -140,6 +156,7 @@ const debounce = (func, wait) => {
 const searchFunction = debounce(function(e) {
     let tempProducts = response.products.filter(product => includes(product, e.target.value));
     setProducts(tempProducts);
+    document.querySelectorAll('.buttons .type-button').forEach(b => b.classList.remove('active'));
 }, 250);
 
 const setDarkMode = (mode) => {
