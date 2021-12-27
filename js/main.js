@@ -101,8 +101,11 @@ const addTypeButtons = () => {
     for(const [k, v] of Object.entries(items)) {
         let element = typeButtonTemplate.content.cloneNode(true);
         let button = element.querySelector('.type-button');
-        k === 'sale' || k === 'new' ? button.classList.add('special') : null;
         button.innerText = k;
+        if(k === 'sale' || k === 'new') {
+            button.classList.add('special');
+            button.append(` (${v.length})`);
+        }
         button.addEventListener('click', () => {
             setProducts(items[k]);
             search.value = '';
