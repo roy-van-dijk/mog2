@@ -11,8 +11,8 @@ let navOpen = false;
 const basePageUrl = 'https://store.finalfantasyxiv.com/ffxivstore/en-gb/product/';
 let response = {};
 let items = {
-    sale: [],
     new: [],
+    sale: [],
     all: [],
     outfit: [],
     emote: [],
