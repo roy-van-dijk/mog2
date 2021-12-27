@@ -11,12 +11,14 @@ let navOpen = false;
 const basePageUrl = 'https://store.finalfantasyxiv.com/ffxivstore/en-gb/product/';
 let response = {};
 let items = {
+    sale: [],
+    new: [],
     all: [],
     outfit: [],
-    mount: [],
-    minion: [],
     emote: [],
     boost: [],
+    mount: [],
+    minion: [],
     roll: [],
     dye: [],
     other: [],
@@ -30,20 +32,41 @@ const setProducts = (products) => {
         element.querySelector('.image').src = product.thumbnailUrl;
         element.querySelector('.name').innerText = product.name;
         element.querySelector('.link').href = basePageUrl + product.id;
-        element.querySelector('.price').innerText = product.priceText;
+        element.querySelector('.normal-price').innerText = product.priceText;
+        element.querySelector('.sale-price').innerText = product.salePriceText;
+
+        if(product.topLeftIcon === 'sale') {
+            element.querySelector('.product-item').classList.add('sale');
+        } 
         productList.appendChild(element);
     });
+    window.scrollTo(0, 0);
 }
 
 const sortProducts = (products) => {
     products.forEach(product => {
         items.all.push(product);
         if(includes(product, 'attire') 
-            || includes(product, 'uniform') 
-            || includes(product, 'lord\'s')
-            || includes(product, 'lady\'s')
-            || includes(product, 'for men')
-            || includes(product, 'for women')) {
+        || includes(product, 'uniform') 
+        || includes(product, 'lord\'s')
+        || includes(product, 'lady\'s')
+        || includes(product, 'men\'s')
+        || includes(product, 'women\'s')
+        || includes(product, 'for men')
+        || includes(product, 'for women')
+        || includes(product, ' suit')
+        || includes(product, ' garments')
+        || includes(product, ' robe')
+        || includes(product, 'slippers')
+        || includes(product, 'earrings')
+        || includes(product, 'pendant')
+        || includes(product, 'choker')
+        || includes(product, ' cap')
+        || includes(product, ' mask')
+        || includes(product, ' happi')
+        || includes(product, ' tabi')
+        || includes(product, 'southern seas ')
+        || includes(product, ' ring')) {
             items.outfit.push(product);
         } else if(includes(product, 'mount:')) {
             items.mount.push(product);
@@ -60,8 +83,14 @@ const sortProducts = (products) => {
         } else {
             items.other.push(product);
         }
+
+        if(product.topLeftIcon === 'sale') {
+            items.sale.push(product);
+        } 
+        if(product.topLeftIcon === 'new') {
+            items.new.push(product);
+        }
     });
-    // console.log(items);
 }
 
 const includes = (product, keyword) => {
@@ -72,8 +101,21 @@ const addTypeButtons = () => {
     for(const [k, v] of Object.entries(items)) {
         let element = typeButtonTemplate.content.cloneNode(true);
         let button = element.querySelector('.type-button');
+        k === 'sale' || k === 'new' ? button.classList.add('special') : null;
         button.innerText = k;
-        button.addEventListener('click', () => setProducts(items[k]));
+        button.addEventListener('click', () => {
+            setProducts(items[k]);
+            search.value = '';
+        });
+
+        if(k === 'sale' && items.sale.length === 0) {
+            continue;
+        }
+
+        if (k === 'new' && items.new.length === 0) {
+            continue;
+        }
+
         typeButtonList.appendChild(element);
     }
 }
@@ -83,8 +125,8 @@ const debounce = (func, wait) => {
   
     return function executedFunction(...args) {
         const later = () => {
-        clearTimeout(timeout);
-        func(...args);
+            clearTimeout(timeout);
+            func(...args);
         };
 
         clearTimeout(timeout);
@@ -126,8 +168,8 @@ const closeNav = () => {
 }
 
 const main = () => {
-    addTypeButtons();
     sortProducts(response.products);
+    addTypeButtons();
     setProducts(response.products);
 }
 

@@ -3,6 +3,7 @@
     --bg2: #ffffff;
     --bgi: #232323;
     --color: #737b80;
+    --red: #f54131;
 }
 
 * {
@@ -53,7 +54,7 @@ a:hover {
 main {
     width: 100%;
     max-width: 1200px;
-    margin: 110px auto 20px auto;
+    margin: 100px auto 20px auto;
 }
 
 .products {
@@ -64,36 +65,7 @@ main {
     padding: 0 20px;
 }
 
-.products .image {
-    width: 100%;
-    position: absolute;
-    border-radius: 8px;
-    top: 0;
-    height: 70%;
-    object-fit: cover;
-}
-
-.products .price {
-    position: absolute;
-    font-weight: bold;
-    font-size: 1.8rem;
-    top: 70%;
-    padding: 10px 20px;
-    width: 100%;
-    height: 10%;
-}
-
-.products .name {
-    position: absolute;
-    font-weight: normal;
-    bottom: 0;
-    font-size: 1.5rem;
-    padding: 10px 20px;
-    width: 100%;
-    height: 20%;
-}
-
-.products li {
+.product-item {
     position: relative;
     animation: popin 0.3s;
     padding-top: 100%;
@@ -105,8 +77,47 @@ main {
     box-shadow: 0px 1px 2px 0px rgb(0 0 0 / 20%);
 }
 
-.products li:hover {
+.product-item:hover {
     filter: brightness(0.8);
+}
+
+.product-item .image {
+    width: 100%;
+    position: absolute;
+    border-radius: 8px;
+    top: 0;
+    height: 70%;
+    object-fit: cover;
+}
+
+.product-item .price {
+    position: absolute;
+    font-weight: bold;
+    font-size: 1.8rem;
+    top: 70%;
+    padding: 10px 20px;
+    width: 100%;
+    height: 10%;
+}
+
+.product-item.sale .normal-price {
+    font-size: 1.4rem;
+    text-decoration: line-through;
+    font-weight: normal;
+}
+
+.product-item.sale .sale-price {
+    color: var(--red);
+}
+
+.product-item .name {
+    position: absolute;
+    font-weight: normal;
+    bottom: 0;
+    font-size: 1.5rem;
+    padding: 10px 20px;
+    width: 100%;
+    height: 20%;
 }
 
 nav {
@@ -130,6 +141,7 @@ nav {
     display: flex;
     gap: 10px;
 }
+
 .type-button {
     text-transform: capitalize;
     cursor: pointer;
@@ -160,6 +172,13 @@ nav {
     background-color: var(--bgi);
     border-color: var(--bgi);
     box-shadow: 0 0 0 5px rgb(66 70 73 / 50%);
+}
+
+.type-button.special {
+    background-color: var(--red);
+    border-color: var(--red);
+    color: white;
+    font-weight: bold;
 }
 
 .right-wrapper {
@@ -222,10 +241,13 @@ nav {
 }
 
 @media (max-width: 1000px) {
+    main {
+        margin: 75px auto 20px auto;
+    }
     nav {
         display: none;
         flex-direction: column;
-        top: 80px;
+        top: 50px;
     }
     nav.open {
         display: block;
@@ -249,6 +271,8 @@ nav {
     }
     .menu {
         display: block;
+        height: 50px;
+        line-height: 50px;
     }
     .products {
         grid-template-columns: 1fr 1fr 1fr;
