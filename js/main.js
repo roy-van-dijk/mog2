@@ -154,7 +154,7 @@ const debounce = (func, wait) => {
 }
 
 const searchFunction = debounce(function(e) {
-    let tempProducts = response.products.filter(product => includes(product, e.target.value));
+    let tempProducts = response.products.filter(product => includes(product, e.target.value.toLowerCase()));
     setProducts(tempProducts);
     document.querySelectorAll('.buttons .type-button').forEach(b => b.classList.remove('active'));
 }, 250);
