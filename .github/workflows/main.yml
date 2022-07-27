@@ -1,8 +1,8 @@
 name: Refresh API response
 on:
   schedule:
-    - cron:  '00 11 * * *'
-    
+    - cron: "00 11 * * *"
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -12,12 +12,13 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - name: Make an API request, store the result in /js/response.json and commit
+      - name: Make an API request, store the result in /js/responses and commit
         run: |
-          cd js
-          wget -O response.json "https://api.store.finalfantasyxiv.com/ffxivcatalog/api/products/?lang=en-gb&currency=EUR&limit=999"
-          ls
-          cat response.json
+          cd js/responses
+          wget -O response-eur.json "https://api.store.finalfantasyxiv.com/ffxivcatalog/api/products/?lang=en-gb&currency=EUR&limit=999"
+          wget -O response-gbp.json "https://api.store.finalfantasyxiv.com/ffxivcatalog/api/products/?lang=en-gb&currency=GBP&limit=999"
+          wget -O response-jpy.json "https://api.store.finalfantasyxiv.com/ffxivcatalog/api/products/?lang=en-gb&currency=JPY&limit=999"
+          wget -O response-usd.json "https://api.store.finalfantasyxiv.com/ffxivcatalog/api/products/?lang=en-gb&currency=USD&limit=999"
           git config --global user.name "Roy van Dijk"
           git config --global user.email "roy.van.dijk@outlook.com"
           git add .
