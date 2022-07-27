@@ -52,6 +52,7 @@ const setProducts = (products) => {
 };
 
 const sortProducts = (products) => {
+  Object.keys(items).forEach((item) => (items[item] = []));
   products.forEach((product) => {
     items.all.push(product);
     if (
@@ -205,6 +206,8 @@ const setCurrency = async (currency) => {
   selectedCurrency = currency;
   await refreshApiResponse();
   setProducts(response.products);
+  addTypeButtons();
+  sortProducts(response.products);
 };
 
 const toggleNav = () => {
