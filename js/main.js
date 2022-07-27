@@ -197,11 +197,10 @@ const setDarkMode = (mode) => {
 const setCurrency = async (currency) => {
   closeNav();
   if (currency === null) {
-    localStorage.setItem("currency", selectedCurrency);
-  } else {
-    localStorage.setItem("currency", currency);
+    currency = selectedCurrency;
   }
 
+  localStorage.setItem("currency", currency);
   currencySelector.value = currency;
   selectedCurrency = currency;
   await refreshApiResponse();
