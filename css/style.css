@@ -270,6 +270,7 @@ nav {
     padding-top: 10vh;
     height: 100%;
     overflow-y: scroll;
+    border: none;
   }
   nav.open {
     display: block;
