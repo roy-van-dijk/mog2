@@ -24,6 +24,10 @@ body {
   overflow-y: scroll;
 }
 
+body.nav-open {
+  overflow: hidden;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -243,6 +247,7 @@ nav {
 
 .currency-selector {
   width: 40%;
+  height: 44px;
 }
 
 @keyframes popin {
@@ -262,8 +267,8 @@ nav {
   nav {
     display: none;
     flex-direction: column;
-    top: 7vh;
-    height: 93vh;
+    padding-top: 10vh;
+    height: 100%;
     overflow-y: scroll;
   }
   nav.open {

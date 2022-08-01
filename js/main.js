@@ -211,13 +211,20 @@ const setCurrency = async (currency) => {
 };
 
 const toggleNav = () => {
-  navOpen ? nav.classList.remove("open") : nav.classList.add("open");
+  if (navOpen) {
+    nav.classList.remove("open");
+    document.body.classList.remove("nav-open");
+  } else {
+    nav.classList.add("open");
+    document.body.classList.add("nav-open");
+  }
   navOpen = !navOpen;
 };
 
 const closeNav = () => {
   navOpen = false;
   nav.classList.remove("open");
+  document.body.classList.remove("nav-open");
 };
 
 const main = () => {
