@@ -39,7 +39,7 @@ const setProducts = (products) => {
     element.querySelector(".normal-price").innerText = product.priceText;
     element.querySelector(".sale-price").innerText = product.salePriceText;
 
-    if (product.topLeftIcon === "sale") {
+    if (product.salePriceText !== null && product.priceText !== product.salePriceText) {
       element.querySelector(".product-item").classList.add("sale");
     }
     productList.appendChild(element);
