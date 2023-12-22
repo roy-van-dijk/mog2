@@ -27,6 +27,15 @@ let items = {
   other: [],
 };
 
+const targetUrlByCurrency = (currency, productId) => {
+  switch (currency) {
+    case "eur": return `https://store.finalfantasyxiv.com/ffxivstore/en-gb/product/${productId}?lang=en-gb&currency=EUR`;
+    case "gbp": return `https://store.finalfantasyxiv.com/ffxivstore/en-gb/product/${productId}?lang=en-gb&currency=GBP`;
+    case "usd": return `https://store.finalfantasyxiv.com/ffxivstore/en-us/product/${productId}?lang=en-us&currency=USD`;
+    case "jpy": return `https://store.finalfantasyxiv.com/ffxivstore/ja-jp/product/${productId}?lang=ja-jp&currency=JPY`;
+  }
+}
+
 const setProducts = (products) => {
   closeNav();
   productList.classList.remove("empty");
@@ -35,7 +44,7 @@ const setProducts = (products) => {
     let element = productTemplate.content.cloneNode(true);
     element.querySelector(".image").src = product.thumbnailUrl;
     element.querySelector(".name").innerText = product.name;
-    element.querySelector(".link").href = basePageUrl + product.id;
+    element.querySelector(".link").href = targetUrlByCurrency(selectedCurrency, product.id);
     element.querySelector(".normal-price").innerText = product.priceText;
     element.querySelector(".sale-price").innerText = product.salePriceText;
 
