@@ -19,8 +19,8 @@ jobs:
           wget -O response-gbp.json "https://api.store.finalfantasyxiv.com/ffxivcatalog/api/products/?lang=en-gb&currency=GBP&limit=999"
           wget -O response-jpy.json "https://api.store.finalfantasyxiv.com/ffxivcatalog/api/products/?lang=en-gb&currency=JPY&limit=999"
           wget -O response-usd.json "https://api.store.finalfantasyxiv.com/ffxivcatalog/api/products/?lang=en-gb&currency=USD&limit=999"
-          git config --global user.name "Roy van Dijk"
-          git config --global user.email "roy.van.dijk@outlook.com"
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
           git add .
           git diff-index --quiet HEAD || git commit -am "Response update"
           git pull
